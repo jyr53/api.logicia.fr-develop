@@ -99,10 +99,11 @@ class UsersController extends AppController
         $token = $user['tokenGoogle'];
         $client = new Google\Client();
         $client->setAuthConfig('./config/code_secret_client.json');
-        $client->setRedirectUri('http://localhost:3000/login');
-        $client->addScope('email');
+        $client->setRedirectUri('http://localhost:3000/protected');
+        $client->addScope('https://www.googleapis.com/auth/gmail.labels');
         $client->addScope('profile');
-        $client->addScope('https://mail.google.com');
+        //  $client->addScope('https://mail.google.com');
+        $client->addScope("https://www.googleapis.com/auth/drive");
         $client->setAccessToken($token);
         $client->setAccessType('offline');
 
