@@ -15,30 +15,49 @@
  * the License.
  */
 
-namespace Google\Service\Assuredworkloads;
+namespace Google\Service\ContainerAnalysis;
 
-class GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest extends \Google\Model
+class ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage extends \Google\Collection
 {
+  protected $collection_key = 'paths';
+  /**
+   * @var string[]
+   */
+  public $paths;
   /**
    * @var string
    */
-  public $comment;
+  public $repository;
 
+  /**
+   * @param string[]
+   */
+  public function setPaths($paths)
+  {
+    $this->paths = $paths;
+  }
+  /**
+   * @return string[]
+   */
+  public function getPaths()
+  {
+    return $this->paths;
+  }
   /**
    * @param string
    */
-  public function setComment($comment)
+  public function setRepository($repository)
   {
-    $this->comment = $comment;
+    $this->repository = $repository;
   }
   /**
    * @return string
    */
-  public function getComment()
+  public function getRepository()
   {
-    return $this->comment;
+    return $this->repository;
   }
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest::class, 'Google_Service_Assuredworkloads_GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest');
+class_alias(ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage::class, 'Google_Service_ContainerAnalysis_ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage');

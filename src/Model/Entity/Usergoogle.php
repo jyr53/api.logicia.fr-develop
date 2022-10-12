@@ -29,5 +29,6 @@ class User extends Entity
         'name' => true,
         'email' => true,
         'tokenGoogle' => true,
+        'idgoogle' => true,
     ];
 }

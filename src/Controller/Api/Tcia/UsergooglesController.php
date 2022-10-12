@@ -25,9 +25,10 @@ use PharIo\Manifest\Email;
 require_once 'vendor/autoload.php';
 
 
-class UsersController extends AppController
+class UsergooglesController extends AppController
 {
     use ResponseTrait;
+
 
     public function initialize(): void
     {
@@ -38,92 +39,85 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
 
-        $this->Authentication->allowUnauthenticated(['verifgoogle', 'getuser', 'recupmail']);
+        $this->Authentication->allowUnauthenticated(['verifgoogle', 'recupmail']);
     }
-    public function getuser()
-    {
-        $this->autoRender = false;
-        header('Location: https://www.googleapis.com/oauth2/v3/userinfo');
-        exit();
-    }
+
     public function verifgoogle()
     {
         $this->autoRender = false;
         $client = new Google\Client();
         $client->setAuthConfig('./config/code_secret_client.json');
-        $client->addScope("email");
-        $client->addScope("profile");
-        $client->addScope("https://mail.google.com/");
-        $client->addScope("https://www.googleapis.com/auth/drive");
+        //  $client->addScope("email");
+        //   $client->addScope("profile");
+        //  $client->addScope("https://www.googleapis.com/auth/drive");
+        // ajout des scopes qui sont dans le front si besoin mail 
+        $client->addScope("https://mail.google.com/"); //ici tout pour les mails
+        
         $client->setRedirectUri('http://localhost:3000/login');
         if (isset($this->request->getData()['code'])) {
             $access_token = $client->fetchAccessTokenWithAuthCode($this->request->getData()['code']);
             $oauth2 = new Google\Service\Oauth2($client);
             $userInfo = $oauth2->userinfo->get();
-
-            //  $this->log(print_r($userInfo, true), 'debug');
-            Configure::write('googleuser', $userInfo);
-            // insert les donées
-            $this->insertdata($userInfo['email'], $userInfo['name'], $access_token['access_token']);
+            // insert les donées en bdd
+            $this->insertdata($userInfo['email'], $userInfo['name'], $userInfo['id'], $access_token['access_token'],);
             return $this->setJsonResponse($access_token['access_token']);
         } else return $this->setJsonResponse('KO');
     }
 
-    public function insertdata($email, $name, $token)
+
+    public function insertdata($email, $name, $idg, $token)
     {
         $this->autoRender = false; // pour ne pas rendre une vue (template) cake
-        $user = $this->Users->find()
+        $user = $this->Usergoogles->find()
             ->where(['email' => $email])
             ->first();
 
         if (!$user) { // si user n'existe pas
-            $user = $this->Users->newEntity([
+            $user = $this->Usergoogles->newEntity([
                 'name' => $name,
                 'email' => $email,
-                'tokenGoogle' => $token
+                'tokenGoogle' => $token,
+                'idgoogle' => $idg
             ]);
-            if ($this->Users->save($user)) {
+            if ($this->Usergoogles->save($user)) {
                 $id = $user->id; // L'entity $user contient maintenant l'id
+
             }
         } else {
             $user->tokenGoogle = $token; //remplace le token
-            $this->Users->save($user); //enregistre
+            $this->Usergoogles->save($user); //enregistre
         }
     }
     public function recupmail($mail)
     {
         $this->autoRender = false;
-        $user = $this->Users->find()
+        $user = $this->Usergoogles->find()
             ->where(['email' => $mail])
             ->first();
         $token = $user['tokenGoogle'];
         $client = new Google\Client();
-        $client->setAuthConfig('./config/code_secret_client.json');
-        $client->setRedirectUri('http://localhost:3000/protected');
-        $client->addScope('https://www.googleapis.com/auth/gmail.labels');
-        $client->addScope('profile');
-        //  $client->addScope('https://mail.google.com');
-        $client->addScope("https://www.googleapis.com/auth/drive");
+
         $client->setAccessToken($token);
-        $client->setAccessType('offline');
-
-
-        $service = new Google\Service\Gmail($client);
-        $messages = $service->users_messages->listUsersMessages('me',);
+        $this->log(print_r($client, true), 'debug');
+        $service = new Google\Service\Drive($client);
+        $optParams = [];
+        $optParams['maxResults'] = 5; //Return Only 5 Messages
+        $optParams['labelIds'] = 'UNREAD'; //Only show messages unread
+        $messages = $service->users_messages->listUsersMessages('me', $optParams);
         $list = $messages->getMessages();
         $messageId = $list[0]->getId(); //Grab first Message
         $optParamsGet = [];
         $optParamsGet['format'] = 'full'; //Display message in payload
         $message = $service->users_messages->get('me', $messageId, $optParamsGet);
-        $messagePayload = $message->getPayload();
+        $messagePayload = $messages->getPayload();
         $headers = $message->getPayload()->getHeaders();
-        $parts = $message->getPayload()->getParts();
-
-        $body = $parts[0]['body'];
-        $rawData = $body->data;
+        $parts = $messages->getPayload()->getParts();
+        $this->log(print_r($parts, true), 'debug');
+        $body = $parts['body']; //['body'];
+        /*   $rawData = $body->data;
         $sanitizedData = strtr($rawData, '-_', '+/');
         $decodedMessage = base64_decode($sanitizedData);
-
-        var_dump($decodedMessage);
+        $this->log(print_r($decodedMessage, true), 'debug');*/
+        var_dump($body);
     }
 }

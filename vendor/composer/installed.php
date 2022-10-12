@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '27b4edb1d2b1f70f96cb29f99257384dd1b6c103',
         'name' => 'cakephp/app',
         'dev' => true,
     ),
@@ -29,12 +29,12 @@
             'dev_requirement' => false,
         ),
         'cakephp/app' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '27b4edb1d2b1f70f96cb29f99257384dd1b6c103',
             'dev_requirement' => false,
         ),
         'cakephp/authentication' => array(
@@ -317,12 +317,12 @@
             'dev_requirement' => false,
         ),
         'google/apiclient-services' => array(
-            'pretty_version' => 'v0.269.0',
-            'version' => '0.269.0.0',
+            'pretty_version' => 'v0.270.0',
+            'version' => '0.270.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../google/apiclient-services',
             'aliases' => array(),
-            'reference' => '01431ddcc1d0fd418b3a0dc4b4d99d7c3b94082f',
+            'reference' => '902b415a7ab92ccb50e2b7dda334a3497c8bc3da',
             'dev_requirement' => false,
         ),
         'google/auth' => array(
@@ -398,21 +398,21 @@
             'dev_requirement' => true,
         ),
         'laminas/laminas-diactoros' => array(
-            'pretty_version' => '2.17.0',
-            'version' => '2.17.0.0',
+            'pretty_version' => '2.19.0',
+            'version' => '2.19.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laminas/laminas-diactoros',
             'aliases' => array(),
-            'reference' => '5b32597aa46b83c8b85bb1cf9a6ed4fe7dd980c5',
+            'reference' => 'b3c7e9262b4fbec801d8df2370cdebb4f5d3a0ae',
             'dev_requirement' => false,
         ),
         'laminas/laminas-httphandlerrunner' => array(
-            'pretty_version' => '2.2.0',
-            'version' => '2.2.0.0',
+            'pretty_version' => '2.3.0',
+            'version' => '2.3.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laminas/laminas-httphandlerrunner',
             'aliases' => array(),
-            'reference' => 'eb670c5c7167cd218c61a8b4f6ab9ce339200c16',
+            'reference' => '3c9491473b7decd8f329266a3cb6226a1f90594c',
             'dev_requirement' => false,
         ),
         'league/container' => array(
@@ -709,8 +709,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(

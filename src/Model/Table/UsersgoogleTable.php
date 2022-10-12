@@ -66,6 +66,10 @@ class UsersTable extends Table
             ->requirePresence('tokenGoogle', 'create')
             ->notEmptyString('tokenGoogle');
 
+        $validator
+            ->scalar('idgoogle')
+            ->requirePresence('idgoogle', 'create')
+            ->notEmptyString('idgoogle');
 
 
         return $validator;
