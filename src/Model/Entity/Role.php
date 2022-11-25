@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Model\Entity;
@@ -7,14 +6,15 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Agence Entity
+ * Role Entity
  *
  * @property int $id
- * @property string $nom
+ * @property string $name
+ *
+ * @property \App\Model\Entity\User[] $users
  */
-class Agence extends Entity
+class Role extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -22,15 +22,10 @@ class Agence extends Entity
      * be mass assigned. For security purposes, it is advised to set '*' to false
      * (or remove it), and explicitly make individual fields accessible as needed.
      *
-     * @var array
+     * @var array<string, bool>
      */
     protected $_accessible = [
-        'nom' => true,
-        'departement' => true,
-        'adresse1' => true,
-        'adresse2' => true,
-        'ville' => true,
-        'cp' => true,
-        'transporteur' => true,
+        'name' => true,
+        'users' => true,
     ];
 }

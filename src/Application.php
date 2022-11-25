@@ -30,6 +30,7 @@ use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
+use Cake\Http\Session;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\Routing\Router;
@@ -150,10 +151,12 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $service = new AuthenticationService();
 
         $fields = [
+
+            //  'password' => '4/0ARtbsJrsHxPVC-IaZDioRvSm2bYZVaJvG74TiQu8eI3LzEUtm-odrg1lNSKbX59SMhZpHg'
             IdentifierInterface::CREDENTIAL_USERNAME => 'username',
             IdentifierInterface::CREDENTIAL_PASSWORD => 'password'
         ];
-
+        $service->loadAuthenticator('Authentication.Session');
         $service->loadAuthenticator('Authentication.Jwt', [
             'secretKey' => Security::getSalt(),
             'queryParam' => 'token',

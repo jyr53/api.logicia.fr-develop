@@ -31,155 +31,146 @@ use Cake\Log\Log;
  * @method \App\Model\Entity\Transport[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Transport[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class TransportsTable extends Table {
+class TransportsTable extends Table
+{
 
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config): void {
-        parent::initialize($config);
+        /**
+         * Initialize method
+         *
+         * @param array $config The configuration for the Table.
+         * @return void
+         */
+        public function initialize(array $config): void
+        {
+                parent::initialize($config);
 
-        $this->setTable('transports');
-        $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
+                $this->setTable('transports');
+                $this->setDisplayField('id');
+                $this->setPrimaryKey('id');
 
-        $this->belongsTo('Agences1', [
-            'foreignKey' => 'agence_depart_aller_id',
-            'joinType' => 'LEFT',
-            'className' => 'Agences'
-        ]);
-        $this->belongsTo('Agences2', [
-            'foreignKey' => 'agence_arrivee_aller_id',
-            'joinType' => 'LEFT',
-            'className' => 'Agences'
-        ]);
-        $this->belongsTo('Agences3', [
-            'foreignKey' => 'agence_depart_retour_id',
-            'joinType' => 'LEFT',
-            'className' => 'Agences'
-        ]);
-        $this->belongsTo('Agences4', [
-            'foreignKey' => 'agence_arrivee_retour_id',
-            'joinType' => 'LEFT',
-            'className' => 'Agences'
-        ]);
-//        $this->belongsTo('Interventions', [
-//            'foreignKey' => 'intervention_id',
-//            'joinType' => 'INNER',
-//        ]);
-    }
+                $this->belongsTo('Agences1', [
+                        'foreignKey' => 'agence_depart_aller_id',
+                        'joinType' => 'LEFT',
+                        'className' => 'Agences'
+                ]);
+                $this->belongsTo('Agences2', [
+                        'foreignKey' => 'agence_arrivee_aller_id',
+                        'joinType' => 'LEFT',
+                        'className' => 'Agences'
+                ]);
+                $this->belongsTo('Agences3', [
+                        'foreignKey' => 'agence_depart_retour_id',
+                        'joinType' => 'LEFT',
+                        'className' => 'Agences'
+                ]);
+                $this->belongsTo('Agences4', [
+                        'foreignKey' => 'agence_arrivee_retour_id',
+                        'joinType' => 'LEFT',
+                        'className' => 'Agences'
+                ]);
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator): Validator {
-        $validator
-                ->integer('id')
-                ->allowEmptyString('id', null, 'create');
+        }
 
-        $validator
-                ->scalar('nom_contact')
-                ->maxLength('nom_contact', 255)
-                ->requirePresence('nom_contact', 'create')
-                ->notEmptyString('nom_contact');
+        /**
+         * Default validation rules.
+         *
+         * @param \Cake\Validation\Validator $validator Validator instance.
+         * @return \Cake\Validation\Validator
+         */
+        public function validationDefault(Validator $validator): Validator
+        {
+                $validator
+                        ->integer('id')
+                        ->allowEmptyString('id', null, 'create');
 
-        $validator
-                ->scalar('num_client')
-                ->maxLength('num_client', 20)
-                ->requirePresence('num_client', 'create')
-                ->notEmptyString('num_client');
+                $validator
+                        ->scalar('nom_contact')
+                        ->maxLength('nom_contact', 255)
+                        ->requirePresence('nom_contact', 'create')
+                        ->notEmptyString('nom_contact');
 
-        $validator
-                ->scalar('tel_contact')
-                ->maxLength('tel_contact', 10)
-                ->requirePresence('tel_contact', 'create')
-                ->notEmptyString('tel_contact');
+                $validator
+                        ->scalar('num_client')
+                        ->maxLength('num_client', 20)
+                        ->requirePresence('num_client', 'create')
+                        ->notEmptyString('num_client');
 
-        $validator
-                ->scalar('email_contact')
-                ->requirePresence('email_contact', 'create')
-                ->notEmptyString('email_contact');
+                $validator
+                        ->scalar('tel_contact')
+                        ->maxLength('tel_contact', 20)
+                        ->requirePresence('tel_contact', 'create')
+                        ->notEmptyString('tel_contact');
 
-        $validator
-                ->scalar('contenu')
-                ->requirePresence('contenu', 'create')
-                ->notEmptyString('contenu');
+                $validator
+                        ->scalar('email_contact')
+                        ->requirePresence('email_contact', 'create')
+                        ->notEmptyString('email_contact');
 
-        $validator
-                ->scalar('motif')
-                ->requirePresence('motif', 'create')
-                ->notEmptyString('motif');
+                $validator
+                        ->scalar('contenu')
+                        ->requirePresence('contenu', 'create')
+                        ->notEmptyString('contenu');
 
-        $validator
-                ->date('date_depot')
-                ->requirePresence('date_depot', 'create')
-                ->notEmptyDate('date_depot');
+                $validator
+                        ->scalar('motif')
+                        ->requirePresence('motif', 'create')
+                        ->notEmptyString('motif');
 
-        $validator
-                ->integer('nb_colis')
-                ->requirePresence('nb_colis', 'create')
-                ->notEmptyString('nb_colis');
+                $validator
+                        ->integer('nb_colis')
+                        ->requirePresence('nb_colis', 'create')
+                        ->notEmptyString('nb_colis');
 
-        $validator
-                ->integer('etat')
-                ->requirePresence('etat', 'create')
-                ->notEmptyString('etat');
+                $validator
+                        ->date('date_depart_aller')
+                        ->allowEmptyDate('date_depart_aller');
+                $validator
+                        ->date('date_arrivee_aller')
+                        ->allowEmptyDate('date_arrivee_aller');
+                $validator
+                        ->date('date_depart_retour')
+                        ->allowEmptyDate('date_depart_retour');
+                $validator
+                        ->date('date_arrivee_retour')
+                        ->allowEmptyDate('date_arrivee_retour');
+                $validator
+                        ->scalar('expediteur')
+                        ->requirePresence('expediteur', 'create')
+                        ->notEmptyString('expediteur');
 
-        $validator
-                ->date('date_depart_aller')
-                ->allowEmptyDate('date_depart_aller');
-        $validator
-                ->date('date_arrivee_aller')
-                ->allowEmptyDate('date_arrivee_aller');
-        $validator
-                ->date('date_depart_retour')
-                ->allowEmptyDate('date_depart_retour');
-        $validator
-                ->date('date_arrivee_retour')
-                ->allowEmptyDate('date_arrivee_retour');
-        $validator
-                ->scalar('expediteur')
-                ->requirePresence('expediteur', 'create')
-                ->notEmptyString('expediteur');
+                return $validator;
+        }
 
-        return $validator;
-    }
+        /**
+         * Returns a rules checker object that will be used for validating
+         * application integrity.
+         *
+         * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+         * @return \Cake\ORM\RulesChecker
+         */
+        public function buildRules(RulesChecker $rules): RulesChecker
+        {
+                $rules->add($rules->existsIn('agence_depart_aller_id', 'Agences1'), ['errorField' => 'agence_depart_aller_id']);
+                $rules->add($rules->existsIn('agence_arrivee_aller_id', 'Agences2'), ['errorField' => 'agence_arrivee_aller_id']);
+                $rules->add($rules->existsIn('agence_depart_retour_id', 'Agences3'), ['errorField' => 'agence_depart_retour_id']);
+                $rules->add($rules->existsIn('agence_arrivee_retour_id', 'Agences4'), ['errorField' => 'agence_arrivee_retour_id']);
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules): RulesChecker {
-        $rules->add($rules->existsIn('agence_depart_aller_id', 'Agences1'), ['errorField' => 'agence_depart_aller_id']);
-        $rules->add($rules->existsIn('agence_arrivee_aller_id', 'Agences2'), ['errorField' => 'agence_arrivee_aller_id']);
-        $rules->add($rules->existsIn('agence_depart_retour_id', 'Agences3'), ['errorField' => 'agence_depart_retour_id']);
-        $rules->add($rules->existsIn('agence_arrivee_retour_id', 'Agences4'), ['errorField' => 'agence_arrivee_retour_id']);
+                return $rules;
+        }
 
-        return $rules;
-    }
+        public function getAllTransports()
+        {
+                return $this->find()->contain(["Agences1", "Agences2", "Agences3", "Agences4"]);
+        }
+        /**
+         * Returns the database connection name to use by default.
+         *
+         * @return string
+         */
 
-    public function getAllTransports() {
-        return $this->find()->contain(["Agences1", "Agences2", "Agences3", "Agences4"]);
-    }
-    /**
-     * Returns the database connection name to use by default.
-     *
-     * @return string
-     */
-	 
-/*
+        /*
     public static function defaultConnectionName(): string {
         return 'tcia';
     }
 	*/
-
 }

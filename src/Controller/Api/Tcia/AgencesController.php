@@ -17,7 +17,8 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property \App\Model\Table\AgencesTable $Agences
  * @method \App\Model\Entity\Agence[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class AgencesController extends AppController {
+class AgencesController extends AppController
+{
 
     //Chargement de la fonction pour le formatage de la réponse en json
     use ResponseTrait;
@@ -26,7 +27,8 @@ class AgencesController extends AppController {
      * Fonction d'initialisation
      */
 
-    public function initialize(): void {
+    public function initialize(): void
+    {
         parent::initialize();
 
         //Chargement des modèles liés à la talbe Domaines
@@ -36,10 +38,11 @@ class AgencesController extends AppController {
         $this->loadComponent('ApiData', ['blackholeCallback' => 'blackhole']);
     }
 
-    public function list() {
+    public function list()
+    {
         //Recupere tous les Domaines depuis une fonction du model Domaine
-        $agences = $this->Agences->getAllAgences()->toArray();
 
+        $agences = $this->Agences->getAllAgences()->toArray();
         return $this->setJsonResponse($agences);
     }
 
@@ -48,7 +51,8 @@ class AgencesController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index() {
+    public function index()
+    {
         $agences = $this->paginate($this->Agences);
 
         $this->set(compact('agences'));
@@ -61,7 +65,8 @@ class AgencesController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null) {
+    public function view($id = null)
+    {
         $agence = $this->Agences->get($id, [
             'contain' => [],
         ]);
@@ -74,7 +79,8 @@ class AgencesController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add()
+    {
         $agence = $this->Agences->newEmptyEntity();
         if ($this->request->is('post')) {
             $agence = $this->Agences->patchEntity($agence, $this->request->getData());
@@ -95,7 +101,8 @@ class AgencesController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         $agence = $this->Agences->get($id, [
             'contain' => [],
         ]);
@@ -118,7 +125,8 @@ class AgencesController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
         $this->request->allowMethod(['post', 'delete']);
         $agence = $this->Agences->get($id);
         if ($this->Agences->delete($agence)) {
@@ -129,5 +137,4 @@ class AgencesController extends AppController {
 
         return $this->redirect(['action' => 'index']);
     }
-
 }

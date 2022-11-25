@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '27b4edb1d2b1f70f96cb29f99257384dd1b6c103',
+        'reference' => '2941078cefd9efb4454b3e99f8e602c0cc400f13',
         'name' => 'cakephp/app',
         'dev' => true,
     ),
     'versions' => array(
+        'admad/cakephp-jwt-auth' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'type' => 'cakephp-plugin',
+            'install_path' => __DIR__ . '/../admad/cakephp-jwt-auth',
+            'aliases' => array(),
+            'reference' => '4e86ca3480bf5724049f90aa5261de795689105e',
+            'dev_requirement' => false,
+        ),
         'brick/varexporter' => array(
             'pretty_version' => '0.3.7',
             'version' => '0.3.7.0',
@@ -34,7 +43,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '27b4edb1d2b1f70f96cb29f99257384dd1b6c103',
+            'reference' => '2941078cefd9efb4454b3e99f8e602c0cc400f13',
             'dev_requirement' => false,
         ),
         'cakephp/authentication' => array(
@@ -709,8 +718,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

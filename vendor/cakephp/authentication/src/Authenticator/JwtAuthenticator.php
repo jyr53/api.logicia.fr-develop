@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Authentication\Authenticator;
 
 use ArrayObject;
@@ -72,8 +74,8 @@ class JwtAuthenticator extends TokenAuthenticator
         if (isset($config['algorithms'])) {
             deprecationWarning(
                 'The `algorithms` array config is deprecated, use the `algorithm` string config instead.'
-                . ' This is due to the new recommended usage of `firebase/php-jwt`.'
-                . 'See https://github.com/firebase/php-jwt/releases/tag/v5.5.0'
+                    . ' This is due to the new recommended usage of `firebase/php-jwt`.'
+                    . 'See https://github.com/firebase/php-jwt/releases/tag/v5.5.0'
             );
         }
     }
@@ -108,7 +110,8 @@ class JwtAuthenticator extends TokenAuthenticator
 
         $subjectKey = $this->getConfig('subjectKey');
         if (empty($result[$subjectKey])) {
-            return new Result(null, Result::FAILURE_CREDENTIALS_MISSING);
+            return "jojo";
+            //  return new Result(null, Result::FAILURE_CREDENTIALS_MISSING);
         }
 
         if ($this->getConfig('returnPayload')) {

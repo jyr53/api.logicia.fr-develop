@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ce5f10a1e400af4c9a947e66cbd82fe",
+    "content-hash": "3d3d219b7080fdd4c0de5838d62462d5",
     "packages": [
+        {
+            "name": "admad/cakephp-jwt-auth",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ADmad/cakephp-jwt-auth.git",
+                "reference": "4e86ca3480bf5724049f90aa5261de795689105e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ADmad/cakephp-jwt-auth/zipball/4e86ca3480bf5724049f90aa5261de795689105e",
+                "reference": "4e86ca3480bf5724049f90aa5261de795689105e",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^4.0",
+                "firebase/php-jwt": "^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~8.5.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "ADmad\\JwtAuth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ADmad",
+                    "homepage": "https://github.com/ADmad",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP plugin for authenticating using JSON Web Tokens",
+            "homepage": "http://github.com/ADmad/cakephp-jwt-auth",
+            "keywords": [
+                "Authentication",
+                "authenticate",
+                "cakephp",
+                "jwt"
+            ],
+            "support": {
+                "issues": "https://github.com/ADmad/cakephp-jwt-auth/issues",
+                "source": "https://github.com/ADmad/cakephp-jwt-auth"
+            },
+            "time": "2021-02-21T08:56:19+00:00"
+        },
         {
             "name": "cakedc/auth",
             "version": "7.1.0",

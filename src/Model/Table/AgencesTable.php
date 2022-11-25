@@ -82,14 +82,6 @@ class AgencesTable extends Table {
                 ->scalar('transporteur')
                 ->requirePresence('departement', 'create')
                 ->notEmptyString('departement');
-        $validator
-                ->scalar('username')
-                ->notEmptyString('username');
-
-        $validator
-                ->scalar('password')
-                ->notEmptyString('password');
-
         return $validator;
     }
 
@@ -97,9 +89,7 @@ class AgencesTable extends Table {
         return $this->find();
     }
 
-    public function getByUsername($username) {
-        return $this->find()->where(['username' => $username]);
-    }
+
 
     /**
      * Returns the database connection name to use by default.

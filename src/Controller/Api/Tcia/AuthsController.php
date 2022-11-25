@@ -1,7 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\Api\Tcia;
+
 use App\Controller\AppController;
 use Cake\Event\EventInterface;
 use Cake\Utility\Security;
@@ -18,7 +20,8 @@ class AuthsController extends AppController
 
     use ResponseTrait;
 
-    public function initialize(): void {
+    public function initialize(): void
+    {
         parent::initialize();
         $this->loadComponent('RequestHandler');
     }
@@ -31,8 +34,9 @@ class AuthsController extends AppController
 
     public function login()
     {
-        
+        $this->log(print_r("coucou", true), 'debug');
         $result = $this->Authentication->getResult();
+      
         if ($result->isValid()) {
             $user = $result->getData();
             $payload = [
@@ -50,15 +54,15 @@ class AuthsController extends AppController
                 'result' => $result->getErrors(),
             ];
         }
-        
+
         return $this->setJsonResponse($json);
     }
 
     public function index()
     {
-		$this->log("index", 'debug');
+        $this->log("index", 'debug');
         $identity = $this->Authentication->getIdentity();
-		$this->log(print_r($identity->getOriginalData(),true), 'debug');
+        $this->log(print_r($identity->getOriginalData(), true), 'debug');
 
         $json = ['user' => $identity->getOriginalData()];
 
